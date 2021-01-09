@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const app = require('../app')
+const app = require('../dist/app')
 const { port } = require('../config/index')
 const { dbURI } = require('../config/index')
 const mongoose = require('mongoose')
