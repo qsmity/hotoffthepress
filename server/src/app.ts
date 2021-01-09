@@ -6,7 +6,7 @@ import logger from 'morgan';
 
 // internal imports
 import sessionRouter from './routes/session'
-import userRouter from './routes/user'
+import usersRouter from './routes/users'
 
 // express app
 const app = express();
@@ -19,7 +19,7 @@ app.use(cookieParser());
 
 //mount routers - api
 app.use('/api/session', sessionRouter)
-app.use('/api/user', userRouter)
+app.use('/api/users', usersRouter)
 
 // register views
 app.set('view engine', 'html');
