@@ -52,7 +52,7 @@ app.use(function (err: Error, req: Request, res: Response, next: NextFunction) {
 
   res.status(err.status || 500);
   res.json({
-    message: err.message,
+    message: err.message || 'Something went wrong!',
     error: err,
   });
 });
