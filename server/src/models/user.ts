@@ -1,5 +1,6 @@
 import mongoose from 'mongoose'
 import bcrypt from 'bcrypt'
+import { NextFunction} from 'express'
 
 const Schema = mongoose.Schema;
 
@@ -34,8 +35,6 @@ interface user extends mongoose.Document {
     email: string;
     password: string;
     bookmarks?: (string | Date)[];
-
-    // comparePassword(passwordInput: string): Promise<boolean>;
 }
 
 // password hashing - bycrypt (hook)
@@ -56,7 +55,7 @@ userSchema.pre<user>('save', async function (next){
 })
 
 // custom compare password function
-userSchema.methods.comparePassword = async function(user: user, candidatePassword, next): Promise<boolean> {
+userSchema.methods.comparePassword = async function(user: user, candidatePassword: string, next: NextFunction): Promise<boolean | void> {
     try{
         const isMatch = await bcrypt.compare(candidatePassword, user.password)
         return isMatch
