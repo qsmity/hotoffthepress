@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { signup } from '../controllers/auth'
+import { signup, login } from '../controllers/auth'
 import { Request, Response } from 'express'
 
 const router = Router()
@@ -11,5 +11,7 @@ router.get('/', (req: Request, res: Response) => {
 
 // routes
 router.post('/signup', signup)
+
+router.post('/login', login)
 
 export default router;

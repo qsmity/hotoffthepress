@@ -9,4 +9,5 @@ router.get('/', (req, res) => {
 });
 // routes
 router.post('/signup', auth_1.signup);
+router.post('/login', auth_1.login);
 exports.default = router;

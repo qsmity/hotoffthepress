@@ -16,7 +16,7 @@ exports.login = exports.signup = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const config_1 = __importDefault(require("../config"));
 const models_1 = __importDefault(require("../models"));
-const secret = config_1.default.jwtConfig.secret;
+const { secret, expiresIn } = config_1.default.jwtConfig;
 const signup = function (req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -28,7 +28,11 @@ const signup = function (req, res, next) {
             let token = jsonwebtoken_1.default.sign({
                 id,
                 username
-            }, secret);
+            }, secret, { expiresIn: parseInt(expiresIn, 10) } // 604,800 seconds = 1 week
+            );
+            // add token to cookies
+            res.cookie('token', token);
+            // return user
             return res.status(201).json({
                 id,
                 username,
@@ -37,7 +41,7 @@ const signup = function (req, res, next) {
             // save token to cookies
         }
         catch (e) {
-            // 1100 is mongoose validation error code
+            // 1100 is mongoose validation error code (defined in schema)
             if (e.code === 1100) {
                 e.message = 'Sorry, that username or email is already taken';
             }
@@ -50,5 +54,47 @@ const signup = function (req, res, next) {
     });
 };
 exports.signup = signup;
-const login = function () { };
+const login = function (req, res, next) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            // find user
+            const { email, password } = req.body;
+            const user = yield models_1.default.User.findOne({
+                email
+            });
+            const { id, username } = user;
+            // check password match with custom bcrypt compare function
+            const isMatch = yield user.comparePassword(user, password, next);
+            // if match - generate token and send back res
+            if (isMatch) {
+                let token = jsonwebtoken_1.default.sign({
+                    id,
+                    username
+                }, secret);
+                // add token to cookies
+                res.cookie('token', token);
+                // return user
+                res.status(200).json({
+                    id,
+                    username,
+                    token
+                });
+            }
+            else {
+                // validation error
+                return next({
+                    status: 400,
+                    message: 'Invalid Email/Password'
+                });
+            }
+        }
+        catch (e) {
+            // general error
+            return next({
+                status: 400,
+                message: e.message
+            });
+        }
+    });
+};
 exports.login = login;

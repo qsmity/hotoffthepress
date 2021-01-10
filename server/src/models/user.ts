@@ -59,14 +59,14 @@ userSchema.pre<userDoc>('save', async function (next){
 })
 
 // custom compare password function for user instance (not model)
-userSchema.method('comparePassword', async function( user: userDoc,candidatePassword: string, next): Promise<boolean | void> {
+userSchema.methods.comparePassword =  async function( user: userDoc, candidatePassword: string, next): Promise<boolean | void> {
     try{
         const isMatch = await bcrypt.compare(candidatePassword, user.password)
         return isMatch
     }catch(e){
         return next(e)
     }
-})
+}
 
 
 // MODEL
