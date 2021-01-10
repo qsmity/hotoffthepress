@@ -48,6 +48,7 @@ export const requireAuthorization = function (req: Request, res: Response, next:
 
         jwt.verify(token, secret, function (_err: any, payload: any) {
             // id in params(url) for single resource
+            console.log(payload.id, req.params.id)
             if (payload && payload.id === req.params.id) {
                 return next()
             } else {

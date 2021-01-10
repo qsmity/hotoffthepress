@@ -13,9 +13,9 @@ import cors from 'cors';
 
 // internal imports
 import sessionRouter from './routes/session'
-import usersRouter from './routes/users'
+import bookmarksRouter from './routes/bookmarks'
 import genericErrorHandler from './controllers/error'
-import { requireAuthentication, requireAuthorization } from './middleware/auth'
+import { requireAuthentication, requireAuthorization } from './middleware/session'
 
 
 // express app
@@ -31,10 +31,10 @@ app.use(cors())
 //mount routers - api
 app.use('/api/session', sessionRouter)
 app.use(
-  '/api/users', 
+  '/api/users/:id/bookmarks', 
   requireAuthentication,
   requireAuthorization,
-  usersRouter
+  bookmarksRouter
   )
 
 // register views

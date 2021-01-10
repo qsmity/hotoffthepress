@@ -45,6 +45,7 @@ const requireAuthorization = function (req, res, next) {
         const { token } = req.cookies;
         jsonwebtoken_1.default.verify(token, secret, function (_err, payload) {
             // id in params(url) for single resource
+            console.log(payload.id, req.params.id);
             if (payload && payload.id === req.params.id) {
                 return next();
             }
