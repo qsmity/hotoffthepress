@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.requireAuthorization = exports.requireAuthentication = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const config_1 = __importDefault(require("../config"));
 const { secret } = config_1.default.jwtConfig;
@@ -10,9 +11,9 @@ const { secret } = config_1.default.jwtConfig;
 const requireAuthentication = function (req, res, next) {
     try {
         //grab token
-        let { token } = req.cookies;
+        const { token } = req.cookies;
         // verify token
-        jsonwebtoken_1.default.verify(token, secret, function (err, payload) {
+        jsonwebtoken_1.default.verify(token, secret, function (_err, payload) {
             // if payload exists they are verified - move on
             if (payload) {
                 return next();
@@ -36,4 +37,30 @@ const requireAuthentication = function (req, res, next) {
         });
     }
 };
+exports.requireAuthentication = requireAuthentication;
 // AUTHORIZATION
+const requireAuthorization = function (req, res, next) {
+    try {
+        // grab token
+        const { token } = req.cookies;
+        jsonwebtoken_1.default.verify(token, secret, function (_err, payload) {
+            // id in params(url) for single resource
+            if (payload && payload.id === req.params.id) {
+                return next();
+            }
+            else {
+                return next({
+                    status: 401,
+                    message: 'Unauthorized'
+                });
+            }
+        });
+    }
+    catch (e) {
+        return next({
+            status: 401,
+            message: 'Unauthorized'
+        });
+    }
+};
+exports.requireAuthorization = requireAuthorization;

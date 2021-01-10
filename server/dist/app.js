@@ -17,6 +17,7 @@ const cors_1 = __importDefault(require("cors"));
 const session_1 = __importDefault(require("./routes/session"));
 const users_1 = __importDefault(require("./routes/users"));
 const error_1 = __importDefault(require("./controllers/error"));
+const auth_1 = require("./middleware/auth");
 // express app
 const app = express_1.default();
 // middleware
@@ -27,7 +28,7 @@ app.use(cookie_parser_1.default());
 app.use(cors_1.default());
 //mount routers - api
 app.use('/api/session', session_1.default);
-app.use('/api/users', users_1.default);
+app.use('/api/users', auth_1.requireAuthentication, auth_1.requireAuthorization, users_1.default);
 // register views
 app.set('view engine', 'html');
 // sandbox routes

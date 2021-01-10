@@ -15,6 +15,7 @@ import cors from 'cors';
 import sessionRouter from './routes/session'
 import usersRouter from './routes/users'
 import genericErrorHandler from './controllers/error'
+import { requireAuthentication, requireAuthorization } from './middleware/auth'
 
 
 // express app
@@ -29,7 +30,12 @@ app.use(cors())
 
 //mount routers - api
 app.use('/api/session', sessionRouter)
-app.use('/api/users', usersRouter)
+app.use(
+  '/api/users', 
+  requireAuthentication,
+  requireAuthorization,
+  usersRouter
+  )
 
 // register views
 app.set('view engine', 'html');

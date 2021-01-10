@@ -6,14 +6,14 @@ import env from '../config'
 const { secret } = env.jwtConfig!
 
 // AUTHENTICATION
-const requireAuthentication = function (req: Request, res: Response, next: NextFunction) {
+export const requireAuthentication = function (req: Request, res: Response, next: NextFunction) {
     try {
 
         //grab token
-        let { token } = req.cookies
+        const { token } = req.cookies
 
         // verify token
-        jwt.verify(token, secret, function (err, payload: any) {
+        jwt.verify(token, secret, function (_err: any, payload: any) {
             // if payload exists they are verified - move on
             if (payload) {
                 return next()
@@ -39,3 +39,31 @@ const requireAuthentication = function (req: Request, res: Response, next: NextF
 }
 
 // AUTHORIZATION
+
+export const requireAuthorization = function (req: Request, res: Response, next: NextFunction) {
+
+    try {
+        // grab token
+        const { token } = req.cookies
+
+        jwt.verify(token, secret, function (_err: any, payload: any) {
+            // id in params(url) for single resource
+            if (payload && payload.id === req.params.id) {
+                return next()
+            } else {
+                return next({
+                        status: 401,
+                        message: 'Unauthorized'
+                    })
+            }
+        })
+    } catch (e) {
+        return next({
+            status: 401,
+            message: 'Unauthorized'
+        })
+    }
+
+
+
+}
