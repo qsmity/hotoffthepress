@@ -56,8 +56,8 @@ userSchema.pre('save', function (next) {
         }
     });
 });
-// custom compare password function
-userSchema.methods.comparePassword = function (user, candidatePassword, next) {
+// custom compare password function for user instance (not model)
+userSchema.method('comparePassword', function (user, candidatePassword, next) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const isMatch = yield bcrypt_1.default.compare(candidatePassword, user.password);
@@ -67,7 +67,7 @@ userSchema.methods.comparePassword = function (user, candidatePassword, next) {
             return next(e);
         }
     });
-};
+});
 // MODEL
 const User = mongoose_1.default.model('User', userSchema);
 exports.default = User;
