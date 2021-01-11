@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import * as mui from '@material-ui/core'
+import { backendApiCall } from '../services/api'
 //TYPES
 import { RouteComponentProps } from 'react-router-dom'
 
@@ -19,7 +20,18 @@ const AuthForm: React.FC<IAuthFormProps> = ({ authType, buttonText, heading }) =
     const updatePassword = (event: React.ChangeEvent<HTMLInputElement>): void => setPassword(event.target.value)
     const updateCheckPassword = (event: React.ChangeEvent<HTMLInputElement>): void => setCheckPassword(event.target.value)
 
-    const handleSubmit = () => { }
+    const handleSubmit = (event: React.SyntheticEvent) => { 
+        event.preventDefault()
+        if(isPasswordMatch()){
+            console.log('they match!!')
+        } else {
+            console.log('they don\'t match')
+        }
+    }
+
+    const isPasswordMatch = (): boolean => {
+        return (password === checkPassword)
+    }
 
 
     return (
@@ -45,7 +57,7 @@ const AuthForm: React.FC<IAuthFormProps> = ({ authType, buttonText, heading }) =
                     id='email'
                     label='Email:'
                     variant='filled'
-                    value={username}
+                    value={email}
                     onChange={updateEmail}
                 />
                 <mui.TextField
@@ -53,7 +65,7 @@ const AuthForm: React.FC<IAuthFormProps> = ({ authType, buttonText, heading }) =
                     label='Password:'
                     variant='filled'
                     type='password'
-                    value={username}
+                    value={password}
                     onChange={updatePassword}
                 />
 
@@ -63,7 +75,7 @@ const AuthForm: React.FC<IAuthFormProps> = ({ authType, buttonText, heading }) =
                         label='Check Password:'
                         variant='filled'
                         type='password'
-                        value={username}
+                        value={checkPassword}
                         onChange={updateCheckPassword}
                     />
                 )}
