@@ -10,3 +10,4 @@ const GET_BOOKMARKS = 'GET_BOOKMARKS'
 // THUNKS
 
 // REDUCER
+export {}
