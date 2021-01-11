@@ -5,3 +5,13 @@
     padding: 0; 
     box-sizing: inherit;
 }
+
+html {
+    /*default font-size for most browsers is 16px. 62.5% of 16 is 10 px. this makes it easier
+    to deduce rems later*/
+    font-size: 62.5%; // 10px
+}
+
+body {
+    box-sizing: border-box;
+}
