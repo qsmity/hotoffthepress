@@ -7,12 +7,12 @@ const ADD_CURRENT_USER = 'ADD_CURRENT_USER'
 */
 
 // TYPES AND INTERFACES
-interface User {
+export interface User {
     id: string;
     username: string;
 }
 
-interface State {
+export interface SessionState {
     isAuthenticated: boolean;
     user: User | {}
 }
@@ -39,10 +39,11 @@ const DEFAULT_STATE = {
     user: {}
 }
 
-export default (state: State = DEFAULT_STATE, action: Actions) => {
+export default (state: SessionState = DEFAULT_STATE, action: Actions) => {
     switch (action.type) {
         case ADD_CURRENT_USER:
             return {
+                ...state,
                 isAuthenticated: !!Object.keys(action.user).length, 
                 user: action.user
             }

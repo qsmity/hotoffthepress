@@ -3,7 +3,7 @@ const ADD_ERROR = 'ADD_ERROR'
 const REMOVE_ERROR = 'REMOVE_ERROR'
 
 // TYPES AND INTERFACES
-interface State {
+export interface ErrorState {
     message: string | null
 }
 
@@ -29,7 +29,7 @@ const removeError = () => {
 
 // REDUCER - generic error handler
 
-export default (state: State = { message: null}, action: Actions) => {
+export default (state: ErrorState = { message: null}, action: Actions) => {
     switch (action.type) {
         case ADD_ERROR:
             return {...state, message: action.message};
