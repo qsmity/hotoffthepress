@@ -18,8 +18,8 @@ const Landing: React.FC = () => {
             </header>
             <main>
                 <section className='section-composite'>
-                    <div className='heading-secondary'>
-
+                    <div className='heading-secondary section-composite__heading'>
+                        <p>View News Feeds</p>
                     </div>
                     <div className='composition'>
                         <img className='composition__photo composition__photo-p1' src={hot1} alt=''/>
