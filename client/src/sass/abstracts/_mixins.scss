@@ -1,6 +1,6 @@
 @mixin backColorCategory {
     .science {
-        color: $color-science;
+        color: white;
         background-image: linear-gradient(to bottom, 
         rgba(lighten($color-science, 15%), .4),
         rgba(lighten($color-science, 15%), .9)
@@ -8,7 +8,7 @@
         background-size: cover;
     }
     .general {
-        color: $color-general;
+        color: white;
         background-image: linear-gradient(to bottom, 
         rgba(lighten($color-general, 15%), .4),
         rgba(lighten($color-general, 15%), .9)
@@ -16,7 +16,7 @@
         background-size: cover;
     }
     .business {
-        color: $color-business;
+        color: white;
         background-image: linear-gradient(to bottom, 
         rgba(lighten($color-business, 15%), .4),
         rgba(lighten($color-business, 15%), .9)
@@ -24,7 +24,7 @@
         background-size: cover;
     }
     .health {
-        color: $color-health;
+        color: white;
         background-image: linear-gradient(to bottom, 
         rgba(lighten($color-health, 15%), .4),
         rgba(lighten($color-health, 15%), .9)
@@ -32,7 +32,7 @@
         background-size: cover;
     }
     .sports {
-        color: $color-sports;
+        color: white;
         background-image: linear-gradient(to bottom, 
         rgba(lighten($color-sports, 15%), .4),
         rgba(lighten($color-sports, 15%), .9)
@@ -48,7 +48,7 @@
         background-size: cover;
     }
     .tech {
-        color: $color-tech;
+        color: white;
         background-image: linear-gradient(to bottom, 
         rgba(lighten($color-tech, 15%), .4),
         rgba(lighten($color-tech, 15%), .9)

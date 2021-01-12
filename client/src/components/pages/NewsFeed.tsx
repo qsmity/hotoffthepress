@@ -4,19 +4,19 @@ import hot3 from '../../hot-3.jpg'
 
 const NewsFeed: React.FC<INewsFeedProps> = ({ category }) => {
 
-    const [newResults, setNewsResults] = useState([])
+    const [newsResults, setNewsResults] = useState([])
 
     // redirect user to news story site
     const handleclick = (e: React.SyntheticEvent) => {
         window.location.href = e.currentTarget.id
     }
 
-    useEffect( () => {
-        ( async () => {
-            const 
-            const res = await fetch('')
-        })()
-    }, [category])
+    // useEffect( () => {
+    //     ( async () => {
+    //         const 
+    //         const res = await fetch('')
+    //     })()
+    // }, [category])
     
     return (
         <>
