@@ -1,31 +1,59 @@
 @mixin backColorCategory {
     .science {
         color: $color-science;
-        background-color: rgba(lighten($color-science, 15%), 0.438);
+        background-image: linear-gradient(to bottom, 
+        rgba(lighten($color-science, 15%), .4),
+        rgba(lighten($color-science, 15%), .9)
+        ), url(../../hot-1.jpg);
+        background-size: cover;
     }
     .general {
         color: $color-general;
-        background-color: rgba(lighten($color-general, 15%), 0.438);
+        background-image: linear-gradient(to bottom, 
+        rgba(lighten($color-general, 15%), .4),
+        rgba(lighten($color-general, 15%), .9)
+        ), url(../../hot-2.jpg);
+        background-size: cover;
     }
     .business {
         color: $color-business;
-        background-color: rgba(lighten($color-business, 15%), 0.438);
+        background-image: linear-gradient(to bottom, 
+        rgba(lighten($color-business, 15%), .4),
+        rgba(lighten($color-business, 15%), .9)
+        ), url(../../hot-3.jpg);
+        background-size: cover;
     }
     .health {
         color: $color-health;
-        background-color: rgba(lighten($color-health, 15%), 0.438);
+        background-image: linear-gradient(to bottom, 
+        rgba(lighten($color-health, 15%), .4),
+        rgba(lighten($color-health, 15%), .9)
+        ), url(../../hot-4.jpg);
+        background-size: cover;
     }
     .sports {
         color: $color-sports;
-        background-color: rgba(lighten($color-sports, 15%), 0.438);
+        background-image: linear-gradient(to bottom, 
+        rgba(lighten($color-sports, 15%), .4),
+        rgba(lighten($color-sports, 15%), .9)
+        ), url(../../hot-5.jpg);
+        background-size: cover;
     }
     .entertainment {
         color: $color-entertainment;
-        background-color: rgba(lighten($color-entertainment, 15%), 0.438);
+        background-image: linear-gradient(to bottom, 
+        rgba(lighten($color-entertainment, 15%), .4),
+        rgba(lighten($color-entertainment, 15%), .9)
+        ), url(../../hot-6.jpg);
+        background-size: cover;
     }
     .tech {
         color: $color-tech;
-        background-color: rgba(lighten($color-tech, 15%), 0.438);
+        background-image: linear-gradient(to bottom, 
+        rgba(lighten($color-tech, 15%), .4),
+        rgba(lighten($color-tech, 15%), .9)
+        ), url(../../hot-6.jpg);
+        background-size: cover;
     }
 }
 
