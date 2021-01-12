@@ -28,14 +28,13 @@ export const signup = async function (req: Request, res: Response, next: NextFun
             username,
             token
         })
-        // save token to cookies
 
     } catch (e) {
-        // 1100 is mongoose validation error code (defined in schema)
-        if (e.code === 1100) {
+        // 11000 is mongoose validation error code (defined in schema)
+        if (e.code === 11000) {
             e.message = 'Sorry, that username or email is already taken'
         }
-
+        
         // otherwise send back other generic errors in the next function
         return next({
             status: 400,

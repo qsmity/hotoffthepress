@@ -1,15 +1,18 @@
 import React, { useState } from 'react'
 import * as mui from '@material-ui/core'
-import { backendApiCall } from '../services/api'
+import {authenticateUser} from '../store/reducers/session'
+import {useDispatch} from 'react-redux'
 //TYPES
 import { RouteComponentProps } from 'react-router-dom'
 
-enum AuthType {
+export enum AuthType {
     SIGNUP = 'signup',
     LOGIN = 'login'
 }
 
 const AuthForm: React.FC<IAuthFormProps> = ({ authType, buttonText, heading }) => {
+    const dispatch = useDispatch()
+
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -22,11 +25,22 @@ const AuthForm: React.FC<IAuthFormProps> = ({ authType, buttonText, heading }) =
 
     const handleSubmit = (event: React.SyntheticEvent) => { 
         event.preventDefault()
-        if(isPasswordMatch()){
+        // if passwords match and on signup form
+        if(isPasswordMatch() && authType === AuthType.SIGNUP){
+            dispatch(authenticateUser(authType, {username, email, password}))
             console.log('they match!!')
+        // if on login form
+        } else if (authType === AuthType.LOGIN) {
+            dispatch(authenticateUser(authType, {email, password}))
         } else {
             console.log('they don\'t match')
         }
+
+        // clear fields
+        setUsername('')
+        setPassword('')
+        setCheckPassword('')
+        setEmail('')
     }
 
     const isPasswordMatch = (): boolean => {

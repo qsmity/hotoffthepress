@@ -1,5 +1,9 @@
+import {AuthType} from '../../components/AuthForm'
+import {backendApiCall, Method} from '../../services/api'
 //ACTION TYPES
-const ADD_CURRENT_USER = 'ADD_CURRENT_USER'
+
+// had to make actionType 'ADD_CURRENT_USER' as custom type to satisfy the dispatch arg type later
+const ADD_CURRENT_USER: 'ADD_CURRENT_USER' = 'ADD_CURRENT_USER'
 /*  
     don't need 'remove current user' action since logout will just pass an empty user obj
     which will cause 'isAuthenticated' boolean to be false
@@ -22,6 +26,10 @@ type Actions = {
     user: User
 }
 
+type IDispatchCurrentUser = (user: Actions) => void 
+
+
+
 // ACTION CREATORS
 const addCurrentUser = (user: User) => {
     return {
@@ -31,6 +39,19 @@ const addCurrentUser = (user: User) => {
 }
 
 // THUNKS
+
+export const authenticateUser = (type: AuthType, userData: {}) => {
+    return async(dispatch: IDispatchCurrentUser) => {
+        // already has error handling on custom method
+        const user = await backendApiCall(Method.POST, `/api/session/${type}`, userData)
+        //grab out token to add to local storage
+        const {token, id, username} = user
+        // set token to localStorage
+        localStorage.setItem('token', token)
+        // build user obj with just id and username from returned user from db
+        dispatch(addCurrentUser({id, username}))
+    }
+}
 
 // REDUCER
 
