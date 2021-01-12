@@ -25,7 +25,7 @@ const Navbar: React.FC = () => {
                 <span className='navbar__logo-text'>OFF&rarr;THE&rarr;PRESS</span>
             </div>
             {!isLoggedIn && (
-                <div>
+                <div className='navbar__links'>
                     <Link to='/signup'>
                         SignUp
                     </Link>
