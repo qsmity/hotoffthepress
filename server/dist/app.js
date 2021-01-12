@@ -29,6 +29,7 @@ app.use(cors_1.default());
 //mount routers - api
 app.use('/api/session', session_1.default);
 app.use('/api/users/:id/bookmarks', session_2.requireAuthentication, session_2.requireAuthorization, bookmarks_1.default);
+app.use('/api/dataNewsApi');
 // register views
 app.set('view engine', 'html');
 // sandbox routes
