@@ -1,0 +1,18 @@
+.session-header {
+    height: 77.5rem;
+    width: 90rem;
+    background-image: linear-gradient(to right bottom, 
+        rgba(white, .3),
+        rgba(black, 1)),
+        url(../../bigCity.jpg);
+    background-size: cover;
+    display: inline-block;
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 0, 50% 100%,0 100%);
+    overflow: hidden;
+}
+
+.form-container {
+    background-color: red;
+    display: inline-block;
+}

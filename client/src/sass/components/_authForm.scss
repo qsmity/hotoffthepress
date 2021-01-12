@@ -1,0 +1,32 @@
+.authform{
+    text-align: center;
+    font-size: $default-font-size;
+    width: 40rem;
+    height: 60rem;
+    position: absolute;
+    top: 24rem;
+
+    &__errors {
+        background-color: rgba(pink, .4);
+        border: 1px solid rgba(rgb(255, 141, 160), .4);
+        width: 80%;
+        font-size: 1.2rem;
+        font-weight: 400;
+        color: rgba(rgb(255, 106, 106),.6);
+        position: absolute;
+        top: -10rem;
+        left: 3.5rem;
+        border-radius: .3rem;
+    }
+}
+
+.form {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 3rem;
+
+    & * {
+        margin-bottom: 2rem;
+    }
+}

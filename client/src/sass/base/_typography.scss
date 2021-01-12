@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@400;500;700;800&display=swap');
+
+body {
+    font-family: 'Bodoni Moda', serif;
+    font-weight: 400;
+    line-height: 1.7;
+    color: $color-grey-dark;
+    background-color: $color-grey-light;
+    padding: 7.5rem 0 0 0;
+}
+
+.heading-primary {
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    color: white;
+    padding: 2rem;
+
+    &--main {
+        font-size: 7rem;
+        font-weight: 700;
+        display: block;
+        letter-spacing: 6.2rem;
+    }
+
+    &--sub{
+        font-size: 6rem;
+        font-weight: 400;
+    }
+}
