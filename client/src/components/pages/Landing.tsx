@@ -19,7 +19,7 @@ const Landing: React.FC = () => {
             <main>
                 <section className='section-composite'>
                     <div className='heading-secondary section-composite__heading'>
-                        <p>View News Feeds</p>
+                        <span>View News Feeds</span>
                     </div>
                     <div className='composition'>
                         <img className='composition__photo composition__photo-p1' src={hot1} alt=''/>

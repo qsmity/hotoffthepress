@@ -8,7 +8,9 @@ const NewsFeed: React.FC<INewsFeedProps> = ({ category }) => {
             <h1>{category}</h1>
             <h1>{category}</h1>
             <h1>{category}</h1>
-            <p className={`heading-secondary ${category}`}>{category}</p>
+            <div className='heading-secondary'>
+                <span className={category}>{category}</span>
+            </div>
         </>
     )
 }
