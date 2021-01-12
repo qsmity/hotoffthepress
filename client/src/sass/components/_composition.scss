@@ -4,6 +4,7 @@
     height: 100%;
     position: relative;
     padding: $composition-padding;
+    
 
     &__photo{
         width: 45%;
@@ -12,6 +13,9 @@
         top:0;
         left:0;
         z-index: 3;
+        border-radius: .2rem;
+        outline-offset: 1rem;
+        transition: transform .7s;
 
         &--p1{
             top: 0;
@@ -37,5 +41,15 @@
             top: 10rem;
             left: 12rem;
         }
+
+        &:hover {
+            outline: 1.7rem dotted black;
+            transform: scale(1.1);
+            z-index: 4;
+        }
+    }
+
+    &:hover &__photo:not(:hover) {
+        transform: scale(.9);
     }
 }
