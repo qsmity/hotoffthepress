@@ -1,0 +1,34 @@
+@mixin backColorCategory {
+    .science {
+        color: $color-science;
+        background-color: rgba(lighten($color-science, 15%), 0.438);
+    }
+    .general {
+        color: $color-general;
+        background-color: rgba(lighten($color-general, 15%), 0.438);
+    }
+    .business {
+        color: $color-business;
+        background-color: rgba(lighten($color-business, 15%), 0.438);
+    }
+    .health {
+        color: $color-health;
+        background-color: rgba(lighten($color-health, 15%), 0.438);
+    }
+    .sports {
+        color: $color-sports;
+        background-color: rgba(lighten($color-sports, 15%), 0.438);
+    }
+    .entertainment {
+        color: $color-entertainment;
+        background-color: rgba(lighten($color-entertainment, 15%), 0.438);
+    }
+    .tech {
+        color: $color-tech;
+        background-color: rgba(lighten($color-tech, 15%), 0.438);
+    }
+}
+
+@mixin boxShadow {
+    box-shadow: 0 2px 10px rgba($color-grey-medium, .6);
+}

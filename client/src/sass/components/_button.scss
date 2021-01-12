@@ -9,8 +9,8 @@
         font-size: 2rem;
         display: inline-block;
         text-decoration: none;
-        color: black;
         position: relative;
+        text-align: center;
         transition: all .25s;
 
     }
@@ -25,7 +25,7 @@
         left: 0;
         z-index: -1;
         border-radius: 10rem;
-        transition: all .4s;
+        transition: all .6s;
 
     }
     &:hover {
@@ -37,8 +37,17 @@
     }
     &--white{
         background-color: white;
+        color: black;
         &::after{
             background-color: white;
+        }
+    }
+    &--grey{
+        background-color: $color-grey-medium;
+        color: white;
+        font-weight: 700;
+        &::after{
+            background-color: $color-grey-medium;
         }
     }
 
