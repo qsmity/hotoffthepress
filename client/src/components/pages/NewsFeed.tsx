@@ -4,6 +4,11 @@ import hot3 from '../../hot-3.jpg'
 
 
 const NewsFeed: React.FC<INewsFeedProps> = ({ category }) => {
+
+    // redirect user to news story site
+    const handleclick = (e: React.SyntheticEvent) => {
+        window.location.href = e.currentTarget.id
+    }
     return (
         <>
             <header className={`header ${category}`}>
@@ -20,7 +25,7 @@ const NewsFeed: React.FC<INewsFeedProps> = ({ category }) => {
                     
                 </div>
                 <section className='section-newsfeed'>
-                    <figure className='section-newsfeed__shape'>
+                    <figure onClick={handleclick} id='http://www.google.com' className='section-newsfeed__shape'>
                         <img className='section-newsfeed__image' src={hot3} alt='' />
                         <figcaption className='section-newsfeed__text'>
                             lorem ipsum jidjifj idfjidjfid jidjfidfj
