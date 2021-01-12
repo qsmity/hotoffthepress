@@ -56,7 +56,7 @@ userSchema.pre('save', function (next) {
         }
     });
 });
-// custom compare password function
+// custom compare password function for user instance (not model)
 userSchema.methods.comparePassword = function (user, candidatePassword, next) {
     return __awaiter(this, void 0, void 0, function* () {
         try {

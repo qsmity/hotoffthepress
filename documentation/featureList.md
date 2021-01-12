@@ -97,14 +97,14 @@ Using MongoDB and Mongoose hosted by atlas
 - `/login` Login Page
 - `/news/:category` particular news topic
 - `/new/search` search results
-- `/user/profile` account setting - stretch goal
-- `/user/bookmarks` saved news stories
+- `/user/:id/profile` account setting - stretch goal
+- `/user/:id/bookmarks` saved news stories
 
 ## Backend Routes
-- `/api/user/token` login 
+- `/api/user/login` login 
 - `/api/user/signup` signup 
 - `/api/user/logout` logout
-- `/api/user/bookmarks` retrieve, update, remove bookmarks
+- `/api/user/:id/bookmarks` retrieve, update, remove bookmarks
 
 ## State Shape (Redux)
 ```JS

@@ -4,6 +4,17 @@ import { NextFunction} from 'express'
 
 const Schema = mongoose.Schema;
 
+// INTERFACES
+export interface userDoc extends mongoose.Document {
+    username: string;
+    email: string;
+    password: string;
+    bookmarks?: (string | Date)[];
+
+    comparePassword: (candidatePassword: string, next: NextFunction) => Promise<boolean>
+}
+
+
 // SCHEMA
 const userSchema = new Schema({
     username: {
@@ -29,16 +40,9 @@ const userSchema = new Schema({
     }]
 }, {timestamps: true})
 
-// INTERFACES
-interface user extends mongoose.Document {
-    username: string;
-    email: string;
-    password: string;
-    bookmarks?: (string | Date)[];
-}
 
 // password hashing - bycrypt (hook)
-userSchema.pre<user>('save', async function (next){
+userSchema.pre<userDoc>('save', async function (next){
     try {
         // hash the password if it was modified
         if(this.isModified('password')){
@@ -54,8 +58,8 @@ userSchema.pre<user>('save', async function (next){
     }
 })
 
-// custom compare password function
-userSchema.methods.comparePassword = async function(user: user, candidatePassword: string, next: NextFunction): Promise<boolean | void> {
+// custom compare password function for user instance (not model)
+userSchema.methods.comparePassword =  async function( user: userDoc, candidatePassword: string, next): Promise<boolean | void> {
     try{
         const isMatch = await bcrypt.compare(candidatePassword, user.password)
         return isMatch
@@ -66,6 +70,6 @@ userSchema.methods.comparePassword = async function(user: user, candidatePasswor
 
 
 // MODEL
-const User = mongoose.model<user>('User', userSchema)
+const User = mongoose.model<userDoc>('User', userSchema)
 
 export default User;

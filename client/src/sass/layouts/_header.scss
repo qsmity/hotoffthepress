@@ -1,0 +1,20 @@
+.header {
+    height: 90vh;
+    width: 100vw;
+    position: relative;
+    padding: 7.5rem 0 0 0;
+    text-align: center;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .spacing {
+        letter-spacing: .6rem;
+    }
+
+    h1 {
+        position: relative;
+        top: -8rem;
+    }
+}
