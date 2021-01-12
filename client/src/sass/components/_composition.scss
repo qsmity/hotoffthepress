@@ -4,12 +4,38 @@
     height: 100%;
     position: relative;
     padding: $composition-padding;
+
     &__photo{
-        width: 55%;
+        width: 45%;
         box-shadow: 0 1.5rem 4rem rgba(black, .4);
         position: absolute;
         top:0;
         left:0;
         z-index: 3;
+
+        &--p1{
+            top: 0;
+            left: 0;
+        }
+        &--p2{
+            top: -15rem;
+            left: 17rem;
+        }
+        &--p3{
+            top: 0;
+            left: 40rem;
+        }
+        &--p4{
+            top: 27rem;
+            left: 34rem;
+        }
+        &--p5{
+            top: -10rem;
+            left: 30rem;
+        }
+        &--p6{
+            top: 10rem;
+            left: 12rem;
+        }
     }
 }

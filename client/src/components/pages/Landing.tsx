@@ -22,14 +22,21 @@ const Landing: React.FC = () => {
                         <span>View News Feeds</span>
                     </div>
                     <div className='composition'>
-                        <img className='composition__photo composition__photo-p1' src={hot1} alt=''/>
-                        <img className='composition__photo composition__photo-p2' src={hot2} alt=''/>
-                        <img className='composition__photo composition__photo-p3' src={hot3} alt=''/>
-                        <img className='composition__photo composition__photo-p4' src={hot4} alt=''/>
-                        <img className='composition__photo composition__photo-p5' src={hot5} alt=''/>
-                        <img className='composition__photo composition__photo-p6' src={hot6} alt=''/>
+                        <img className='composition__photo composition__photo--p1' src={hot1} alt='skyscraper photo'/>
+                        <img className='composition__photo composition__photo--p2' src={hot2} alt='business photo'/>
+                        <img className='composition__photo composition__photo--p3' src={hot3} alt='new stream photo'/>
+                        <img className='composition__photo composition__photo--p4' src={hot4} alt='typewriter photo'/>
+                        <img className='composition__photo composition__photo--p5' src={hot5} alt='news stand photo'/>
+                        <img className='composition__photo composition__photo--p6' src={hot6} alt='iphone photo'/>
                     </div>
                 </section>
+                <footer className='footer'>
+                    <div className='heading-secondary'>
+                        <span>Footer</span>
+                    </div>
+                    <div className='footer-about'>
+                    </div>
+                </footer>
             </main>
             <footer>
 
