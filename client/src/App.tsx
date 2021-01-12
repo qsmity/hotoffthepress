@@ -11,7 +11,7 @@ const store = configureStore()
 
 export interface StoreState {
   session: SessionState;
-  error: ErrorState
+  errors: ErrorState
 }
 
 const App: React.FC = () => {

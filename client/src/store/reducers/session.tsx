@@ -1,5 +1,8 @@
-import {AuthType} from '../../components/AuthForm'
-import {backendApiCall, Method} from '../../services/api'
+import { AuthType } from '../../components/AuthForm'
+import { Method } from '../../services/api'
+import { addError, removeError } from './error'
+//types
+import { Actions as ErrorActions } from './error'
 //ACTION TYPES
 
 // had to make actionType 'ADD_CURRENT_USER' as custom type to satisfy the dispatch arg type later
@@ -26,7 +29,9 @@ type Actions = {
     user: User
 }
 
-type IDispatchCurrentUser = (user: Actions) => void 
+// not used
+type IDispatchCurrentUser = (user: Actions) => void
+type IDispatchRemoveError = (error: ErrorActions) => void
 
 
 
@@ -39,17 +44,67 @@ const addCurrentUser = (user: User) => {
 }
 
 // THUNKS
+// find better typing for mult dispatches
+// export const authenticateUser = (type: AuthType, userData: {}) => {
+//     return (dispatch: any) => {
+//         debugger
+//         return new Promise((resolve, reject) => {
+//             return backendApiCall(Method.POST, `/api/session/${type}`, userData)
+//                 .then(data => {
+//                     console.log('inauthen', data)
+//                     resolve(data)
+//                 })
+//         })
+        // try {
+        //     // already has error handling on custom method
+        //     const user = await backendApiCall(Method.POST, `/api/session/${type}`, userData)
+        //     //grab out token to add to local storage
+        //     const { token, id, username } = user
+        //     // set token to localStorage
+        //     localStorage.setItem('token', token)
+        //     // build user obj with just id and username from returned user from db
+        //     dispatch(addCurrentUser({ id, username }))
+        //     dispatch(removeError())
+        // } catch (e) {
+        //     dispatch(addError(e.message))
+        // }
+//     }
+// }
 
+// login or signup
 export const authenticateUser = (type: AuthType, userData: {}) => {
-    return async(dispatch: IDispatchCurrentUser) => {
-        // already has error handling on custom method
-        const user = await backendApiCall(Method.POST, `/api/session/${type}`, userData)
-        //grab out token to add to local storage
-        const {token, id, username} = user
-        // set token to localStorage
-        localStorage.setItem('token', token)
-        // build user obj with just id and username from returned user from db
-        dispatch(addCurrentUser({id, username}))
+    return async (dispatch: any) => {
+        try {
+            debugger
+            dispatch(removeError())
+            const res = await fetch(`/api/session/${type}`,{
+                method: Method.POST,
+                headers: {
+                    'Content-Type': 'application/json'
+                }, 
+                body: JSON.stringify(userData)
+            })
+
+            const data = await res.json()
+
+            if(!res.ok){
+                throw data
+            }
+
+            //grab out token to add to local storage
+            const { token, id, username } = data
+
+            // set token to localStorage
+            localStorage.setItem('token', token)
+
+            // build user obj with just id and username from returned user from db
+            dispatch(addCurrentUser({ id, username }))
+            
+
+        } catch(e){
+            console.log(e)
+            dispatch(addError(e.message))
+        }
     }
 }
 
@@ -65,7 +120,7 @@ export default (state: SessionState = DEFAULT_STATE, action: Actions) => {
         case ADD_CURRENT_USER:
             return {
                 ...state,
-                isAuthenticated: !!Object.keys(action.user).length, 
+                isAuthenticated: !!Object.keys(action.user).length,
                 user: action.user
             }
         default:

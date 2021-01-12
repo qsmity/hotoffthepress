@@ -1,25 +1,25 @@
 //ACTION TYPES
-const ADD_ERROR = 'ADD_ERROR'
-const REMOVE_ERROR = 'REMOVE_ERROR'
+const ADD_ERROR: 'ADD_ERROR' = 'ADD_ERROR'
+const REMOVE_ERROR: 'REMOVE_ERROR' = 'REMOVE_ERROR'
 
 // TYPES AND INTERFACES
 export interface ErrorState {
     message: string | null
 }
 
-type Actions = 
-    {type: "ADD_ERROR", message: string}
+export type Actions = 
+    | {type: "ADD_ERROR", message: string}
     | {type: "REMOVE_ERROR"}
 
 // ACTION CREATORS
-const addError = (error: string) => {
+export const addError = (error: string) => {
     return {
         type: ADD_ERROR, 
         message: error
     }
 }
 
-const removeError = () => {
+export const removeError = () => {
     return {
         type: REMOVE_ERROR
     }

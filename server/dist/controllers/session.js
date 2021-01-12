@@ -58,6 +58,10 @@ const login = function (req, res, next) {
         try {
             // find user
             const { email, password } = req.body;
+            // if either email or password is empty throw error
+            if (!email || !password) {
+                throw Error;
+            }
             const user = yield models_1.default.User.findOne({
                 email
             });
@@ -73,7 +77,7 @@ const login = function (req, res, next) {
                 // add token to cookies
                 res.cookie('token', token);
                 // return user
-                res.status(200).json({
+                return res.status(200).json({
                     id,
                     username,
                     token
@@ -89,9 +93,10 @@ const login = function (req, res, next) {
         }
         catch (e) {
             // general error
+            console.log('general error');
             return next({
                 status: 400,
-                message: e.message
+                message: 'Invalid Email/Password'
             });
         }
     });

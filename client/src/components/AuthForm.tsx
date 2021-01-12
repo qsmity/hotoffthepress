@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import * as mui from '@material-ui/core'
-import {authenticateUser} from '../store/reducers/session'
-import {useDispatch} from 'react-redux'
+import { authenticateUser } from '../store/reducers/session'
+import { useDispatch, useSelector } from 'react-redux'
+import { StoreState } from '../App'
 //TYPES
 import { RouteComponentProps } from 'react-router-dom'
 
@@ -18,21 +19,24 @@ const AuthForm: React.FC<IAuthFormProps> = ({ authType, buttonText, heading }) =
     const [password, setPassword] = useState('')
     const [checkPassword, setCheckPassword] = useState('')
 
+    const errors = useSelector((state: StoreState) => state.errors)
+
     const updateUsername = (event: React.ChangeEvent<HTMLInputElement>): void => setUsername(event.target.value)
     const updateEmail = (event: React.ChangeEvent<HTMLInputElement>): void => setEmail(event.target.value)
     const updatePassword = (event: React.ChangeEvent<HTMLInputElement>): void => setPassword(event.target.value)
     const updateCheckPassword = (event: React.ChangeEvent<HTMLInputElement>): void => setCheckPassword(event.target.value)
 
-    const handleSubmit = (event: React.SyntheticEvent) => { 
+    const handleSubmit = (event: React.SyntheticEvent) => {
         event.preventDefault()
         // if passwords match and on signup form
-        if(isPasswordMatch() && authType === AuthType.SIGNUP){
-            dispatch(authenticateUser(authType, {username, email, password}))
+        if (isPasswordMatch() && authType === AuthType.SIGNUP) {
+            dispatch(authenticateUser(authType, { username, email, password }))
             console.log('they match!!')
-        // if on login form
+            // if on login form
         } else if (authType === AuthType.LOGIN) {
-            dispatch(authenticateUser(authType, {email, password}))
+            dispatch(authenticateUser(authType, { email, password }))
         } else {
+            //Todo
             console.log('they don\'t match')
         }
 
@@ -50,13 +54,18 @@ const AuthForm: React.FC<IAuthFormProps> = ({ authType, buttonText, heading }) =
 
     return (
         <section className='authform'>
+            <h1>This is AuthForm</h1>
+            <h1>This is AuthForm</h1>
+            <h1>This is AuthForm</h1>
+            <h1>This is AuthForm</h1>
+            { errors.message && (
+                <div className='errors'>
+                    {errors.message}
+                </div>
+            )}
             <form onSubmit={handleSubmit}>
-                <h1>This is AuthForm</h1>
-                <h1>This is AuthForm</h1>
-                <h1>This is AuthForm</h1>
-                <h1>This is AuthForm</h1>
-                <h2>{heading}</h2>
-                
+            <h2>{heading}</h2>
+
                 {authType === AuthType.SIGNUP && (
                     <mui.TextField
                         id='username'
