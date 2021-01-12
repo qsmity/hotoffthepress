@@ -13,7 +13,7 @@ const MainRoutes: React.FC = (props) => {
                     path='/signup'
                     render={props  => {
                         return (
-                            <Session authType='signup' buttonText='signup' heading='explore the world of news' {...props} />
+                            <Session authType='signup' buttonText='signup' heading='Sign Up' {...props} />
                         )
                     }}/>
                 <Route

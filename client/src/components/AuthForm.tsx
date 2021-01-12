@@ -3,6 +3,8 @@ import * as mui from '@material-ui/core'
 import { authenticateUser } from '../store/reducers/session'
 import { useDispatch, useSelector } from 'react-redux'
 import { StoreState } from '../App'
+import { removeError } from '../store/reducers/error'
+
 //TYPES
 import { RouteComponentProps } from 'react-router-dom'
 
@@ -11,7 +13,7 @@ export enum AuthType {
     LOGIN = 'login'
 }
 
-const AuthForm: React.FC<IAuthFormProps> = ({ authType, buttonText, heading }) => {
+const AuthForm: React.FC<IAuthFormProps> = ({ authType, buttonText, heading, history}) => {
     const dispatch = useDispatch()
 
     const [username, setUsername] = useState('')
@@ -51,19 +53,20 @@ const AuthForm: React.FC<IAuthFormProps> = ({ authType, buttonText, heading }) =
         return (password === checkPassword)
     }
 
+    // listen for route changes - remove displayed error message
+    history.listen( ()=> {
+        dispatch(removeError());
+    })
+
 
     return (
         <section className='authform'>
-            <h1>This is AuthForm</h1>
-            <h1>This is AuthForm</h1>
-            <h1>This is AuthForm</h1>
-            <h1>This is AuthForm</h1>
             { errors.message && (
-                <div className='errors'>
-                    {errors.message}
+                <div className='authform__errors'>
+                    <h2>{errors.message}</h2>
                 </div>
             )}
-            <form onSubmit={handleSubmit}>
+            <form className='form' onSubmit={handleSubmit}>
             <h2>{heading}</h2>
 
                 {authType === AuthType.SIGNUP && (

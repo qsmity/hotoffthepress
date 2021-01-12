@@ -1,10 +1,11 @@
 import { AuthType } from '../../components/AuthForm'
 import { Method } from '../../services/api'
 import { addError, removeError } from './error'
-//types
+// import Cookies from 'js-cookie'
+// TYPES
 import { Actions as ErrorActions } from './error'
-//ACTION TYPES
 
+//ACTION TYPES
 // had to make actionType 'ADD_CURRENT_USER' as custom type to satisfy the dispatch arg type later
 const ADD_CURRENT_USER: 'ADD_CURRENT_USER' = 'ADD_CURRENT_USER'
 /*  
@@ -15,8 +16,8 @@ const ADD_CURRENT_USER: 'ADD_CURRENT_USER' = 'ADD_CURRENT_USER'
 
 // TYPES AND INTERFACES
 export interface User {
-    id: string;
-    username: string;
+    id?: string;
+    username?: string;
 }
 
 export interface SessionState {
@@ -44,38 +45,12 @@ const addCurrentUser = (user: User) => {
 }
 
 // THUNKS
-// find better typing for mult dispatches
-// export const authenticateUser = (type: AuthType, userData: {}) => {
-//     return (dispatch: any) => {
-//         debugger
-//         return new Promise((resolve, reject) => {
-//             return backendApiCall(Method.POST, `/api/session/${type}`, userData)
-//                 .then(data => {
-//                     console.log('inauthen', data)
-//                     resolve(data)
-//                 })
-//         })
-        // try {
-        //     // already has error handling on custom method
-        //     const user = await backendApiCall(Method.POST, `/api/session/${type}`, userData)
-        //     //grab out token to add to local storage
-        //     const { token, id, username } = user
-        //     // set token to localStorage
-        //     localStorage.setItem('token', token)
-        //     // build user obj with just id and username from returned user from db
-        //     dispatch(addCurrentUser({ id, username }))
-        //     dispatch(removeError())
-        // } catch (e) {
-        //     dispatch(addError(e.message))
-        // }
-//     }
-// }
 
+// note: find better typing for mult dispatches
 // login or signup
 export const authenticateUser = (type: AuthType, userData: {}) => {
     return async (dispatch: any) => {
         try {
-            debugger
             dispatch(removeError())
             const res = await fetch(`/api/session/${type}`,{
                 method: Method.POST,
@@ -105,6 +80,15 @@ export const authenticateUser = (type: AuthType, userData: {}) => {
             console.log(e)
             dispatch(addError(e.message))
         }
+    }
+}
+
+export const logout = () => {
+    return (dispatch: IDispatchCurrentUser) => {
+        localStorage.removeItem('token')
+        // Cookies.remove('token')
+        // empty obj to clear current user from redux
+        dispatch(addCurrentUser({}))
     }
 }
 
