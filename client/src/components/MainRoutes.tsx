@@ -6,6 +6,7 @@ import NewsFeed from './pages/NewsFeed'
 import ProtectedRoute from '../hocs/ProtectedRoute'
 import { useSelector } from 'react-redux';
 import NotAuthenticatedRoute from '../hocs/NotAuthenticatedRoute';
+import NotFound from './pages/NotFound'
 //TYPES
 import { StoreState } from '../App'
 
@@ -101,7 +102,7 @@ const MainRoutes: React.FC<RouteComponentProps> = (props) => {
                     category='science'
                     component={NewsFeed}
                 />
-
+                <Route component={NotFound}/>
                 {/* ToDo */}
                 {/* <ProtectedRoute
                     exact
