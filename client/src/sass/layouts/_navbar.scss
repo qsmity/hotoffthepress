@@ -3,14 +3,20 @@
     width: 100vw;
     background-color: white;
     font-size: $default-font-size;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     position: fixed;
     top: 0;
     left: 0;
     @include boxShadow;
     z-index: 10;
+    
+    &__container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        padding: 0 3rem;
+    }
 
     & > * {
         margin-right: 2.5rem;
@@ -23,7 +29,6 @@
     }
 
     &__logo-box {
-        padding-left: 1rem;
         align-items: center;
         display: flex;
     }
