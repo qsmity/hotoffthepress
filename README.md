@@ -5,15 +5,7 @@
 
 ## Features
 - [Features Overview](#Features-Overview)
-- [Purchase history](#Purchase-history)
-- [Dynamically updated crypto currency search bar](#Dynamically-updated-crypto-currency-search-bar)
-- [Dynamically generated stockcharts candlestick graph](#Dynamically-generated-stockcharts-candlestick-graph)
-   - Coingecko stocks API integration
-- [Crypto currency buying power simulator](#Crypto-currency-buying-power-simulator)
-- [Sparkline integration](#Sparkline-integration)
-- [User crypto currency list (watchlist)](#List)
-- [CSRF protection on login and sign up forms](#CSRF-protection-on-login-and-sign-up-forms)
-   - User authentication and authorization
+
 - [Todo](#Todo)
 
 
@@ -73,6 +65,13 @@
 The [datanNewApi](https://datanews.io/docs) was used to collect this data. It was simple to work with, and provided all previously proposed categories along with image and article url's for the user to explore further. 
 
 The biggest challenge was incorporating Typescript on the Front End (React) as well as the Back End, as I am still new to the language. I quickly found that Typescript, although time consuming in the beginning, was a more efficient approach and I had few errors to debug because of it. 
+
+![Landing2](./documentation/hotgallery.png) 
+![Landing](./documentation/hotauth.png)
+![Landing](./documentation/hotentertainment.png)
+![Landing](./documentation/hotgeneral.png)
+![Landing](./documentation/hotnewsfeed.png)
+![Landing](./documentation/hot404.png)
 
 
 ## Todo

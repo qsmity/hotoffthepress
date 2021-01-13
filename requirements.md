@@ -56,18 +56,68 @@ Api Payload and Response for `POST` req to `/api/dataNewsApi`
 This json object is returned and extracted into the correct fields on the `NewsFeed` page on the Front End.
 
 
-
-Componets:
-    - `User Authentication (Session`
-        - I decided to make the site inaccesible for the news feed without being logged in. This deters potentional bad actors and adds more personalized features down the line including profile pictures, bookmarking stories (have the route created just haven't implement it on the Front End)
-    - `Landing` page
-        - It's important from a UI/UX perspective to have a smooth, loud, and visually stimulating landing page to draw users in. Adding the interactive gallery was a key feature in doing so. 
-    - `News Feed` page
-        - D
+### Componets:
+- `User Authentication` (Session page)
+    - I decided to make the site inaccesible for the news feed without being logged in. This deters potentional bad actors and adds more personalized features down the line including profile pictures, bookmarking stories (have the route created just haven't implement it on the Front End)
+    - The database schema is storing relations to books marks that isn't implemented, but I wanted to add it as a stretch goal. It is `nullable`
+    - The username will also display in the future when logged in
+        ![data model](./documentation/hotoffthepress-dbSchema.png)
+- `Landing` page
+    - It's important from a UI/UX perspective to have a smooth, loud, and visually stimulating landing page to draw users in. Adding the interactive gallery was a key feature in doing so. 
+- `NewsFeed` page
+    - Showcases current headling in the particular category selected
 
 The biggest challenge was incorporating Typescript on the Front End (React) as well as the Back End, as I am still new to the language. I quickly found that Typescript, although time consuming in the beginning, was a more efficient approach and I had few errors to debug because of it. 
 
+I had a blast building the application. Thanks for the oppurtunity. I learned a lot these past 7 days! Happy Coding~
 
+## Views
+1. `Landing`
+![Landing](./documentation/hotheader.png)
+    - reusable header with a modern design. I thought it looked loke a typewriter which followed the new them
+![Landing2](./documentation/hotgallery.png) 
+    - creative interactive gallery that captivates users
+![Landing3](./documentation/hotfooter.png)
+    - standard footer with site links
+2. `authentication`
+![Landing](./documentation/hotauth.png)
+    - creative design with asynmmetrice slope which breaks up the monotony of square boxes. common theme in this project
+3. `NewFeed`
+![Landing](./documentation/hotentertainment.png)
+    - reuasable headers for the specific categories
+![Landing](./documentation/hotgeneral.png)
+![Landing](./documentation/hotnewsfeed.png)
+    - again, different shapes break up the boring box shapes. I wanted the grid to be fun with circles instead of cards
+4. `sidebar`
+![Landing](./documentation/hotsidebar.png)
+    - navigation for categories
+5. Reusable elements
+![Landing](./documentation/hotnavbar.png)
+    - button and hamburger menu
+6. `fire emblem`
+![Landing](./documentation/hotlogo.png)
+7. ![Landing](./documentation/hotaccessiblity.png)
+- Accessibility
+    - I used semantic html elements as well as entered in meaningful alt for all images. I made use of `section, figure, figcaption, main, header, h1, h2, h3`. All nested the correct way to boost SEO and screen reading
+8. `404`
+![Landing](./documentation/hot404.png)
+    - Fun 404 page that utilized the header again. I like that it looks likes a typewriter
+9. `Front End Folder Structure `
+![Landing](./documentation/hotreact.png)
+    - The components were broken up into meaningful parts to keep code DRY
+        - pages for full rendered page
+        - utilties for load spinners and error display
+        - hocs for protected routes
+
+
+### 7-in-1 SASS design
+I used the 7 in 1 SASS design to keep code DRY and structured. All partials are imported to index.css. 
+(the other two of the 7 in this pattern are left out because they weren't used)
+- abstracts
+- base
+- components
+- layouts
+- pages
 
 ## Requirements
 1. My modern library of choice was to use `React` with Typescript, as I am most comfortable using it. I leveraged modern React/Redux hooks to speed up development and keep all components function components. React was used to build the entire Front End. 
@@ -102,8 +152,9 @@ The biggest challenge was incorporating Typescript on the Front End (React) as w
         - `hamburger menu` for sidebar
 
 6. I decided to go with the `MVC design pattern`, which allowed me to follow the `seperation of concerns` principal. I seperated out the `routers` into a seperate `routes` directory as well as placing the logic to start the server and test the database connection into a serperate `bin` script. I made a `controllers` folder which houses the api logic for returning `custom errors`, `pinging the dataNewsApi` and `query the mongodb database` for user authentication. This allowed me to keep the app.js file and the routers concice and partitioned which will bear on the side of scalability later. 
+![MVC](./documentation/MVC.png)
 
-4. Reusable UI components:
+7. Reusable UI components:
     - I use a few reusable components I made because it made development easier. This, in conjustion with the `7 in 1` design pattern in SASS greatly reduced potential duplicate code. 
         1. `Header`
             - appended to the top of the following pages: `Landing page`, `all 7 different categories pages`, `404 page`
