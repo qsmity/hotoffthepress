@@ -1,7 +1,7 @@
 import { AuthType } from '../../components/AuthForm'
 import { Method } from '../../services/api'
 import { addError, removeError } from './error'
-// import Cookies from 'js-cookie'
+import Cookies from 'js-cookie'
 // TYPES
 import { Actions as ErrorActions } from './error'
 
@@ -86,7 +86,7 @@ export const authenticateUser = (type: AuthType, userData: {}) => {
 export const logout = () => {
     return (dispatch: IDispatchCurrentUser) => {
         localStorage.removeItem('token')
-        // Cookies.remove('token')
+        Cookies.remove('token')
         // empty obj to clear current user from redux
         dispatch(addCurrentUser({}))
     }

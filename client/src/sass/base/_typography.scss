@@ -28,3 +28,15 @@ body {
         font-weight: 400;
     }
 }
+
+.heading-secondary {
+    font-size: 8rem;
+    span {
+        width: 100%;
+        -webkit-box-decoration-break:clone;
+        box-decoration-break: clone;
+        height: 30rem;
+        padding: 3rem;
+        text-transform: uppercase;
+    }
+}

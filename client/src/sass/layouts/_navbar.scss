@@ -9,7 +9,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    box-shadow: 0 2px 10px rgba($color-grey-medium, .6);
+    @include boxShadow;
     z-index: 10;
 
     & > * {

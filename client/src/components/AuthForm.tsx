@@ -106,6 +106,14 @@ const AuthForm: React.FC<IAuthFormProps> = ({ authType, buttonText, heading, his
                     />
                 )}
                 <mui.Button variant='contained' color='primary' type='submit'>{buttonText}&rarr;</mui.Button>
+                {authType === AuthType.SIGNUP && (
+                    <p>Have an account already. <a href='/login'>Login</a></p>
+
+                )}
+                {authType === AuthType.LOGIN && (
+                    <p>Don't have an account? <a href='/signup'>SignUp</a></p>
+
+                )}
 
             </form>
         </section>

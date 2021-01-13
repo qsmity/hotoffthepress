@@ -14,6 +14,7 @@ import cors from 'cors';
 // internal imports
 import sessionRouter from './routes/session'
 import bookmarksRouter from './routes/bookmarks'
+import dataNewsApiRouter from './routes/dataNewsApi'
 import genericErrorHandler from './controllers/error'
 import { requireAuthentication, requireAuthorization } from './middleware/session'
 
@@ -36,6 +37,7 @@ app.use(
   requireAuthorization,
   bookmarksRouter
   )
+app.use('/api/dataNewsApi', dataNewsApiRouter)
 
 // register views
 app.set('view engine', 'html');

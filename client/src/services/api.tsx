@@ -1,35 +1,28 @@
 
+import {Iheadline} from '../components/pages/NewsFeed'
 export enum Method {
     POST = 'post',
     PUT = 'put',
     DELETE = 'delete',
     GET = 'get'
 }
+ 
+export const dataNewsApiCall = async (category:string, pageNumber:number):Promise<{hits: Iheadline[]}> => {
+    try {
+        const res = await fetch('/api/dataNewsApi', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ category, pageNumber })
+        })
 
-// export const backendApiCall = async (method: string, path: string, body?: {}) => {
-//     try {
-//         let res;
-//         if (method === Method.GET) {
-//             res = await fetch(path)
-//         } else {
-//             res = await fetch(path, {
-//                 method: method,
-//                 headers: {
-//                     'Content-Type': 'application/json'
-//                 },
-//                 body: JSON.stringify(body)
-//             })
-//         }
-//         if(!res.ok){
-//             throw Error
-//         }
+        const headlines:{hits: Iheadline[]} = await res.json()
+        return headlines
 
-//         const data = await res?.json()
-//         return data 
-//     } catch (e) {
-//         console.log(e)
-//     }
-// }
-
-
+    } catch (e) {
+        console.log(e)
+        return e
+    }
+}
 
