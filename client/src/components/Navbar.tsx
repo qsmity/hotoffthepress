@@ -5,8 +5,9 @@ import { StoreState } from '../App'
 import { Button } from '@material-ui/core'
 import * as AuthAction from '../store/reducers/session'
 import WhatshotIcon from '@material-ui/icons/Whatshot';
+import MenuIcon from '@material-ui/icons/Menu';
 
-const Navbar: React.FC = () => {
+const Navbar: React.FC<INavbarProps> = ({ toggleDrawerState }) => {
     const dispatch = useDispatch()
 
     const isLoggedIn = useSelector((state: StoreState) => state.session.isAuthenticated)
@@ -38,13 +39,20 @@ const Navbar: React.FC = () => {
                 )}
 
                 {isLoggedIn && (
-                    <Button variant='contained' color='primary' onClick={logout}>
-                        Logout
-                    </Button>
+                    <div className=''>
+                        <Button variant='contained' color='primary' onClick={logout}>
+                            Logout
+                        </Button>
+                        <a className='menu' onClick={toggleDrawerState(true)}><MenuIcon fontSize='large' ></MenuIcon></a>
+                    </div>
                 )}
             </div>
         </nav>
     )
+}
+// todo - update
+interface INavbarProps {
+    toggleDrawerState: any;
 }
 
 export default Navbar;
