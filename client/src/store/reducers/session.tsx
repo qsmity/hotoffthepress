@@ -15,14 +15,16 @@ const ADD_CURRENT_USER: 'ADD_CURRENT_USER' = 'ADD_CURRENT_USER'
 */
 
 // TYPES AND INTERFACES
+// has to be optional since empty object clears the user to avoid making a remove user action
 export interface User {
     id?: string;
     username?: string;
+    token?:string;
 }
 
 export interface SessionState {
     isAuthenticated: boolean;
-    user: User | {}
+    user: User 
 }
 
 type Actions = {
@@ -30,8 +32,8 @@ type Actions = {
     user: User
 }
 
-// not used
 type IDispatchCurrentUser = (user: Actions) => void
+// not used
 type IDispatchRemoveError = (error: ErrorActions) => void
 
 
@@ -73,7 +75,7 @@ export const authenticateUser = (type: AuthType, userData: {}) => {
             localStorage.setItem('token', token)
 
             // build user obj with just id and username from returned user from db
-            dispatch(addCurrentUser({ id, username }))
+            dispatch(addCurrentUser({ id, username, token }))
             
 
         } catch(e){

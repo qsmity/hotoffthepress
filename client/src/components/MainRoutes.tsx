@@ -1,82 +1,123 @@
 import React from 'react';
-import { Switch, Route, withRouter, Redirect, RouteComponentProps } from 'react-router-dom'
+import { Switch, Route, withRouter, RouteComponentProps } from 'react-router-dom'
 import Landing from './pages/Landing';
 import Session from './pages/Session'
 import NewsFeed from './pages/NewsFeed'
+import ProtectedRoute from '../hocs/ProtectedRoute'
+import { useSelector } from 'react-redux';
+import NotAuthenticatedRoute from '../hocs/NotAuthenticatedRoute';
+//TYPES
+import { StoreState } from '../App'
 
-const MainRoutes: React.FC = (props) => {
+const MainRoutes: React.FC<RouteComponentProps> = (props) => {
+    const token = useSelector((state: StoreState) => state.session.user.token)
     return (
         <div>
             <Switch>
-                <Route exact path='/' render={props => <Landing />} />
-                <Route
+                <NotAuthenticatedRoute
                     exact
+                    token={token}
+                    path='/'
+                    component={Landing}
+                />
+                <NotAuthenticatedRoute
+                    exact
+                    token={token}
                     path='/signup'
-                    render={props => {
-                        return (
-                            <Session authType='signup' buttonText='signup' heading='Sign Up' {...props} />
-                        )
-                    }} />
-                <Route
+                    authType='signup'
+                    buttonText='signup' 
+                    heading='Sign Up' 
+                    component={Session}
+                />
+                <NotAuthenticatedRoute
                     exact
+                    token={token}
                     path='/login'
-                    render={props => {
-                        return (
-                            <Session authType='login' buttonText='login' heading='welcome back' {...props} />
-                        )
-                    }} />
-                   
-                <Route exact path='/news/general'
-                    render={props => {
-                        return (
-                            <NewsFeed category='general' />
-                        )
-                    }}
+                    authType='login' 
+                    buttonText='login'
+                     heading='welcome back'
+                    component={Session}
                 />
-                <Route exact path='/news/business'
-                    render={props => {
-                        return (
-                            <NewsFeed category='business' />
-                        )
-                    }}
+                <ProtectedRoute
+                    exact
+                    token={token}
+                    path='/news/general'
+                    category='general'
+                    component={NewsFeed}
                 />
-                <Route exact path='/news/tech'
-                    render={props => {
-                        return (
-                            <NewsFeed category='tech'/>
-                        )
-                    }}
+                <ProtectedRoute
+                    exact
+                    token={token}
+                    path='/news/business'
+                    category='business'
+                    component={NewsFeed}
                 />
-                <Route exact path='/news/entertainment'
-                    render={props => {
-                        return (
-                            <NewsFeed category='entertainment'/>
-                        )
-                    }}
+                <ProtectedRoute
+                    exact
+                    token={token}
+                    path='/news/general'
+                    category='general'
+                    component={NewsFeed}
                 />
-                <Route exact path='/news/sports' 
-                    render={props => {
-                        return (
-                            <NewsFeed category='sports'/>
-                        )
-                    }}
+                <ProtectedRoute
+                    exact
+                    token={token}
+                    path='/news/business'
+                    category='business'
+                    component={NewsFeed}
                 />
-                <Route exact path='/news/science'
-                    render={props => {
-                        return (
-                            <NewsFeed category='science'/>
-                        )
-                    }}
+                <ProtectedRoute
+                    exact
+                    token={token}
+                    path='/news/tech'
+                    category='tech'
+                    component={NewsFeed}
                 />
-                <Route exact path='/news/health'
-                    render={props => {
-                        return (
-                            <NewsFeed category='health'/>
-                        )
-                    }}
+                <ProtectedRoute
+                    exact
+                    token={token}
+                    path='/news/sports'
+                    category='sports'
+                    component={NewsFeed}
                 />
-                <Route exact path='/news/search' />
-                <Route exact path='/user/:id/bookmarks' />
+                <ProtectedRoute
+                    exact
+                    token={token}
+                    path='/news/entertainment'
+                    category='entertainment'
+                    component={NewsFeed}
+                />
+                <ProtectedRoute
+                    exact
+                    token={token}
+                    path='/news/health'
+                    category='health'
+                    component={NewsFeed}
+                />
+                <ProtectedRoute
+                    exact
+                    token={token}
+                    path='/news/science'
+                    category='science'
+                    component={NewsFeed}
+                />
+
+                {/* ToDo */}
+                {/* <ProtectedRoute
+                    exact
+                    token={token}
+                    path='path='/news/search''
+                    category='science'
+                    component={NewsFeed}
+                />
+                <ProtectedRoute
+                    exact
+                    token={token}
+                    path='/user/:id/bookmarks'
+                    category='science'
+                    component={NewsFeed}
+                /> */}
+
             </Switch>
         </div>
     )

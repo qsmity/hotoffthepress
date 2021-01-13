@@ -3,9 +3,9 @@
     grid-template-columns: repeat(3, 1fr);
     width: 95%;
     margin: 0 auto; 
-    // background-color: pink;
     text-align: center;
     justify-content: center;
+    align-items: center;
     gap: 5rem;
 
     &__shape{
@@ -13,16 +13,19 @@
         width: 35rem;
         clip-path: circle(50% at 50% 50%);
         -webkit-clip-path: circle(50% at 50% 50%);
-        transform: translateX(10rem);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+        position: relative;
 
         &:hover > img {
             cursor: pointer;;
-            transform: scale(1.2) translateX(-8rem);
+            transform: scale(1.2);
             filter: blur(.3rem) brightness(70%);
         } 
         &:hover > figcaption{
             cursor: pointer;
-            transform: translateY(-25rem);
             opacity: 1;
         }
        
@@ -42,8 +45,9 @@
     
     &__image {
         height: 100%;
-        transform: translateX(-8rem);
+        // transform: translateX(-1.5rem);
         transition: all 0.4s;
+        position: absolute;
     }
 }
 
