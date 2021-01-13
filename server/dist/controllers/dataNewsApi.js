@@ -19,12 +19,12 @@ const fetch = require('node-fetch');
 const retrieveHeadlines = function (req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const { category } = req.body;
+            const { category, pageNumber } = req.body;
             const apiKey = config_1.default.apiKey;
             const size = 25;
-            const path = `api.datanews.io/v1/headlines?topic=${category}&size=${size}country=us`;
+            const path = `http://api.datanews.io/v1/headlines?topic=${category}&size=${size}&page=${pageNumber}&country=us`;
             const result = yield fetch(path, {
-                method: 'POST',
+                method: 'GET',
                 headers: {
                     'x-api-key': apiKey
                 }
@@ -32,9 +32,11 @@ const retrieveHeadlines = function (req, res, next) {
             if (!result.ok) {
                 throw result;
             }
-            return res.json(result);
+            const json = yield result.json();
+            return res.send(json);
         }
         catch (e) {
+            console.log(e);
             return next({
                 status: 400,
                 message: 'Data News Api Failed, Check Inputs'

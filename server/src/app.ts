@@ -37,7 +37,7 @@ app.use(
   requireAuthorization,
   bookmarksRouter
   )
-app.use('/api/dataNewsApi')
+app.use('/api/dataNewsApi', dataNewsApiRouter)
 
 // register views
 app.set('view engine', 'html');

@@ -16,6 +16,7 @@ const cors_1 = __importDefault(require("cors"));
 // internal imports
 const session_1 = __importDefault(require("./routes/session"));
 const bookmarks_1 = __importDefault(require("./routes/bookmarks"));
+const dataNewsApi_1 = __importDefault(require("./routes/dataNewsApi"));
 const error_1 = __importDefault(require("./controllers/error"));
 const session_2 = require("./middleware/session");
 // express app
@@ -29,7 +30,7 @@ app.use(cors_1.default());
 //mount routers - api
 app.use('/api/session', session_1.default);
 app.use('/api/users/:id/bookmarks', session_2.requireAuthentication, session_2.requireAuthorization, bookmarks_1.default);
-app.use('/api/dataNewsApi');
+app.use('/api/dataNewsApi', dataNewsApi_1.default);
 // register views
 app.set('view engine', 'html');
 // sandbox routes

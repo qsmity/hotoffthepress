@@ -1,23 +1,61 @@
 import React, { useEffect, useState } from 'react'
-import hot3 from '../../hot-3.jpg'
-
+import { dataNewsApiCall } from '../../services/api'
+import Headlines from '../Headlines'
+import ProgressLoader from '../utilites/ProgressLoader'
+import ErrorMessage from './ErrorMessage'
 
 const NewsFeed: React.FC<INewsFeedProps> = ({ category }) => {
 
-    const [newsResults, setNewsResults] = useState([])
+    const [newsResults, setNewsResults] = useState<Iheadline[] | null>(null)
+    const [isLoading, setIsLoading] = useState(true)
+    const [currentPageNumber, setCurrentPageNumber] = useState(1)
+    const [isError, setIsError] = useState(false)
 
-    // redirect user to news story site
-    const handleclick = (e: React.SyntheticEvent) => {
-        window.location.href = e.currentTarget.id
+    const getNewResults = async (): Promise<void> => {
+        try {
+            // remove api error if exists 
+            setIsError(false)
+            // grab new headlines
+            const headlines: { hits: Iheadline[] } = await dataNewsApiCall(category, currentPageNumber)
+            //update new results
+            setNewsResults(headlines.hits)
+
+        } catch (e) {
+            setIsError(true)
+        }
     }
 
-    // useEffect( () => {
-    //     ( async () => {
-    //         const 
-    //         const res = await fetch('')
-    //     })()
-    // }, [category])
-    
+    const loadMoreResults = async (): Promise<void> => {
+        try {
+            // remove api error if exists 
+            setIsError(false)
+            // grab new headlines
+            const headlines: { hits: Iheadline[] } = await dataNewsApiCall(category, currentPageNumber + 1)
+            //update new results
+            if(newsResults){
+                setNewsResults(newsResults.concat(headlines.hits))
+            }
+
+        } catch (e) {
+            setIsError(true)
+        }
+    }
+
+    useEffect(() => {
+        (async () => {
+
+            try {
+                setIsError(false)
+                const headlines: { hits: Iheadline[] } = await dataNewsApiCall(category, currentPageNumber + 1)
+                setNewsResults(headlines.hits)
+                setIsLoading(false)
+            } catch (e) {
+                setIsError(true)
+            }
+
+        })()
+    }, [category])
+
     return (
         <>
             <header className={`header ${category}`}>
@@ -27,44 +65,22 @@ const NewsFeed: React.FC<INewsFeedProps> = ({ category }) => {
             </header>
             <main>
                 <div className='refresh'>
-                    <a href='#' className='btn btn--grey'>
-                        update
-                    </a>
-
-                    
+                    <ProgressLoader isLoading={isLoading} />
+                    <a
+                        onClick={getNewResults}
+                        href='#results-button'
+                        id='results-button'
+                        className='btn btn--grey'>
+                        new results
+                        </a>
                 </div>
-                <section className='section-newsfeed'>
-                    <figure onClick={handleclick} id='http://www.google.com' className='section-newsfeed__shape'>
-                        <img className='section-newsfeed__image' src={hot3} alt='' />
-                        <figcaption className='section-newsfeed__text'>
-                            lorem ipsum jidjifj idfjidjfid jidjfidfj
-                        </figcaption>
-                    </figure>
-                    <figure className='section-newsfeed__shape'>
-                        <img className='section-newsfeed__image' src={hot3} alt='' />
-                        <figcaption className='section-newsfeed__text'>
-                            lorem ipsum jidjifj idfjidjfid jidjfidfj
-                        </figcaption>
-                    </figure>
-                    <figure className='section-newsfeed__shape'>
-                        <img className='section-newsfeed__image' src={hot3} alt='' />
-                        <figcaption className='section-newsfeed__text'>
-                            lorem ipsum jidjifj idfjidjfid jidjfidfj
-                        </figcaption>
-                    </figure>
-                    <figure className='section-newsfeed__shape'>
-                        <img className='section-newsfeed__image' src={hot3} alt='' />
-                        <figcaption className='section-newsfeed__text'>
-                            lorem ipsum jidjifj idfjidjfid jidjfidfj
-                        </figcaption>
-                    </figure>
-                    <figure className='section-newsfeed__shape'>
-                        <img className='section-newsfeed__image' src={hot3} alt='' />
-                        <figcaption className='section-newsfeed__text'>
-                            lorem ipsum jidjifj idfjidjfid jidjfidfj
-                        </figcaption>
-                    </figure>
-                </section>
+
+                <Headlines
+                    category={category}
+                    newsResults={newsResults}
+                    currentPageNumber={currentPageNumber}
+                    loadMoreResults={loadMoreResults} />
+                <ErrorMessage isError={isError} />
 
             </main>
         </>
@@ -73,6 +89,14 @@ const NewsFeed: React.FC<INewsFeedProps> = ({ category }) => {
 
 interface INewsFeedProps {
     category: string;
+}
+
+export interface Iheadline {
+    url: string,
+    imageUrl: string,
+    description: string,
+    pubDate: string,
+    title: string
 }
 
 enum Categories {
