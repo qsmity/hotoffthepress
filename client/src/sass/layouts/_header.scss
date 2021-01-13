@@ -7,14 +7,20 @@
     background-color: black;
     display: flex;
     justify-content: center;
+    flex-direction: column;
     align-items: center;
+    border-radius: 10rem;
+    @include boxShadow;
+    top: -15rem;
 
+    
     .spacing {
         letter-spacing: .6rem;
     }
-
+    
     h1 {
         position: relative;
         top: -8rem;
     }
 }
+@include backColorCategory;

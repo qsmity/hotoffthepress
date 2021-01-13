@@ -18,29 +18,31 @@ const Navbar: React.FC = () => {
 
     return (
         <nav className='navbar'>
-            <div className='navbar__logo-box'>
-                <Link to='/'>
-                    <WhatshotIcon color='secondary' style={{ fontSize: 40}} />
-                </Link>
-                <span className='navbar__logo-text'>OFF&rarr;THE&rarr;PRESS</span>
-            </div>
-            {!isLoggedIn && (
-                <div className='navbar__links'>
-                    <Link to='/signup'>
-                        SignUp
+            <div className='navbar__container'>
+                <div className='navbar__logo-box'>
+                    <Link to='/'>
+                        <WhatshotIcon color='secondary' style={{ fontSize: 40 }} />
                     </Link>
-                    <Link to='/login'>
-                        Login
-                    </Link>
+                    <span className='navbar__logo-text'>OFF&rarr;THE&rarr;PRESS</span>
                 </div>
+                {!isLoggedIn && (
+                    <div className='navbar__links'>
+                        <Link to='/signup'>
+                            SignUp
+                    </Link>
+                        <Link to='/login'>
+                            Login
+                    </Link>
+                    </div>
 
-            )}
+                )}
 
-            {isLoggedIn && (
-                <Button variant='contained' color='primary' onClick={logout}>
-                    Logout
-                </Button>
-            )}
+                {isLoggedIn && (
+                    <Button variant='contained' color='primary' onClick={logout}>
+                        Logout
+                    </Button>
+                )}
+            </div>
         </nav>
     )
 }

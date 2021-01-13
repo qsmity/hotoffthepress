@@ -1,7 +1,7 @@
 import { AuthType } from '../../components/AuthForm'
 import { Method } from '../../services/api'
 import { addError, removeError } from './error'
-// import Cookies from 'js-cookie'
+import Cookies from 'js-cookie'
 // TYPES
 import { Actions as ErrorActions } from './error'
 
@@ -15,14 +15,16 @@ const ADD_CURRENT_USER: 'ADD_CURRENT_USER' = 'ADD_CURRENT_USER'
 */
 
 // TYPES AND INTERFACES
+// has to be optional since empty object clears the user to avoid making a remove user action
 export interface User {
     id?: string;
     username?: string;
+    token?:string;
 }
 
 export interface SessionState {
     isAuthenticated: boolean;
-    user: User | {}
+    user: User 
 }
 
 type Actions = {
@@ -30,8 +32,8 @@ type Actions = {
     user: User
 }
 
-// not used
 type IDispatchCurrentUser = (user: Actions) => void
+// not used
 type IDispatchRemoveError = (error: ErrorActions) => void
 
 
@@ -73,7 +75,7 @@ export const authenticateUser = (type: AuthType, userData: {}) => {
             localStorage.setItem('token', token)
 
             // build user obj with just id and username from returned user from db
-            dispatch(addCurrentUser({ id, username }))
+            dispatch(addCurrentUser({ id, username, token }))
             
 
         } catch(e){
@@ -86,7 +88,7 @@ export const authenticateUser = (type: AuthType, userData: {}) => {
 export const logout = () => {
     return (dispatch: IDispatchCurrentUser) => {
         localStorage.removeItem('token')
-        // Cookies.remove('token')
+        Cookies.remove('token')
         // empty obj to clear current user from redux
         dispatch(addCurrentUser({}))
     }
