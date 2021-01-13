@@ -78,7 +78,6 @@ const NewsFeed: React.FC<INewsFeedProps> = ({ category }) => {
                 <Headlines
                     category={category}
                     newsResults={newsResults}
-                    currentPageNumber={currentPageNumber}
                     loadMoreResults={loadMoreResults} />
                 <ErrorMessage isError={isError} />
 

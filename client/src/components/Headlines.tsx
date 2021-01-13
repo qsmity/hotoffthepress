@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { Iheadline } from './pages/NewsFeed'
 import  LoadMoreButton  from './utilites/LoadMoreButton'
 
-const Headlines: React.FC<IHeadlineProps> = ({ newsResults, category, currentPageNumber, loadMoreResults }) => {
+const Headlines: React.FC<IHeadlineProps> = ({ newsResults, category, loadMoreResults }) => {
 
     useEffect(() => {
         console.log('')
@@ -51,7 +51,6 @@ const Headlines: React.FC<IHeadlineProps> = ({ newsResults, category, currentPag
 interface IHeadlineProps {
     newsResults: Iheadline[] | null;
     category: string;
-    currentPageNumber: number;
     loadMoreResults: () => void;
 
 }
