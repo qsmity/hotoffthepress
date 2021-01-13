@@ -1,5 +1,4 @@
 import jwt from 'jsonwebtoken'
-import db from '../models'
 import { Request, Response, NextFunction } from 'express'
 import env from '../config'
 
