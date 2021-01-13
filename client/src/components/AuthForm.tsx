@@ -105,7 +105,7 @@ const AuthForm: React.FC<IAuthFormProps> = ({ authType, buttonText, heading, his
                         onChange={updateCheckPassword}
                     />
                 )}
-                <mui.Button variant='contained' color='primary' type='submit'>{buttonText}&rarr;</mui.Button>
+                <mui.Button style={{ fontSize: '1.6rem' }} variant='contained' color='primary' type='submit'>{buttonText}&rarr;</mui.Button>
                 {authType === AuthType.SIGNUP && (
                     <p>Have an account already. <a href='/login'>Login</a></p>
 

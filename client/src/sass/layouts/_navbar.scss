@@ -46,3 +46,9 @@
 .menu {
     cursor: pointer;
 }
+
+.nav__end {
+    display: flex;
+    width: 14rem;
+    justify-content: space-between;
+}

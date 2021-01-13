@@ -39,11 +39,11 @@ const Navbar: React.FC<INavbarProps> = ({ toggleDrawerState }) => {
                 )}
 
                 {isLoggedIn && (
-                    <div className=''>
+                    <div className='nav__end'>
                         <Button variant='contained' color='primary' onClick={logout}>
                             Logout
                         </Button>
-                        <a className='menu' onClick={toggleDrawerState(true)}><MenuIcon fontSize='large' ></MenuIcon></a>
+                        <a className='menu' onClick={toggleDrawerState(true)}><MenuIcon style={{fontSize: 40}}></MenuIcon></a>
                     </div>
                 )}
             </div>
